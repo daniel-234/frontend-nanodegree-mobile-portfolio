@@ -43,9 +43,6 @@
       }
 
       .content { padding: 1em 1em; }
-      .content li { list-style-type: none; font-size: 1.1em;}
-      li img { float:left; padding-right: 1em; }
-      li p { font-size: 0.9em; font-style: italic; }
 
       footer {
         padding: 0 0.5em;
@@ -87,8 +84,8 @@
 
         <figure>
           <picture>
-            <source media="(max-width: 415px" srcset="img/2048_small.png">
-            <source media="(min-width: 416px" srcset="img/2048_medium.png">
+            <source media="(max-width: 415px)" srcset="img/2048_small.png">
+            <source media="(min-width: 416px)" srcset="img/2048_medium.png">
             <img class="img-responsive" src="img/2048_medium.png" alt="2048 game">
           </picture>
         </figure>
@@ -97,22 +94,23 @@
 
         <p>Venison spare ribs dolor tri-tip duis turkey. Ut chicken proident ribeye est flank, sed frankfurter. Kielbasa exercitation ullamco leberkas. Landjaeger turkey culpa, tail short loin consectetur salami venison in corned beef eiusmod qui ad leberkas. Tri-tip adipisicing frankfurter ut sirloin rump consectetur. Chuck sint filet mignon labore eiusmod nulla. Venison shankle pork, consectetur nisi bacon spare ribs anim meatball sausage ball tip labore aute reprehenderit adipisicing.</p>
 
+      </div>
+
+      <footer>
+        <p>&copy; Web Performance 2014 <span id="crp-stats"></span></p>
+        <!-- Use the Web Font Loader library and load fonts asynchronously -->
+          <script>
+            WebFontConfig = {
+              google: { families: [ 'Open+Sans:400,700' ] }
+            };
+
+            (function(d) {
+              var wf = d.createElement('script'), s = d.scripts[0];
+              wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js';
+              s.parentNode.insertBefore(wf, s);
+            })(document);
+          </script>
+      </footer>
     </div>
-
-    <footer>
-      <p>&copy; Web Performance 2014 <span id="crp-stats"></span></p>
-      <!-- Use the Web Font Loader library and load fonts asynchronously -->
-        <script>
-          WebFontConfig = {
-            google: { families: [ 'Open+Sans:400,700' ] }
-          };
-
-          (function(d) {
-            var wf = d.createElement('script'), s = d.scripts[0];
-            wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js';
-            s.parentNode.insertBefore(wf, s);
-          })(document);
-        </script>
-    </footer>
   </body>
 </html>

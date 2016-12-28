@@ -43,9 +43,6 @@
       }
 
       .content { padding: 1em 1em; }
-      .content li { list-style-type: none; font-size: 1.1em;}
-      li img { float:left; padding-right: 1em; }
-      li p { font-size: 0.9em; font-style: italic; }
 
       footer {
         padding: 0 0.5em;
@@ -85,12 +82,12 @@
 
       <div class="content">
 
-        <p>Thanks to everyone at Udacity and Google who made this class happen! Now for a very true meme and some <strike>lorem</strike> bacon ipsum.</p>
+        <p>Thanks to everyone at Udacity and Google who made this class happen! Now for a very true meme and some <s>lorem</s> bacon ipsum.</p>
 
         <figure>
           <picture>
-            <source media="(max-width: 415px" srcset="img/cam_be_like_small.jpg">
-            <source media="(min-width: 416px" srcset="img/cam_be_like_medium.jpg">
+            <source media="(max-width: 415px)" srcset="img/cam_be_like_small.jpg">
+            <source media="(min-width: 416px)" srcset="img/cam_be_like_medium.jpg">
             <img class="img-responsive" src="img/cam_be_like_medium.jpg" alt="Cameron Meme">
           </picture>
         </figure>
@@ -99,11 +96,11 @@
 
         <p>Venison spare ribs dolor tri-tip duis turkey. Ut chicken proident ribeye est flank, sed frankfurter. Kielbasa exercitation ullamco leberkas. Landjaeger turkey culpa, tail short loin consectetur salami venison in corned beef eiusmod qui ad leberkas. Tri-tip adipisicing frankfurter ut sirloin rump consectetur. Chuck sint filet mignon labore eiusmod nulla. Venison shankle pork, consectetur nisi bacon spare ribs anim meatball sausage ball tip labore aute reprehenderit adipisicing.</p>
 
-    </div>
+      </div>
 
-    <footer>
-      <p>&copy; Web Performance 2014 <span id="crp-stats"></span></p>
-      <!-- Use the Web Font Loader library and load fonts asynchronously -->
+      <footer>
+        <p>&copy; Web Performance 2014 <span id="crp-stats"></span></p>
+        <!-- Use the Web Font Loader library and load fonts asynchronously -->
         <script>
           WebFontConfig = {
             google: { families: [ 'Open+Sans:400,700' ] }
@@ -115,6 +112,7 @@
             s.parentNode.insertBefore(wf, s);
           })(document);
         </script>
-    </footer>
+      </footer>
+    </div>
   </body>
 </html>
