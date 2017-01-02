@@ -421,38 +421,34 @@ var resizePizzas = function(size) {
 
   changeSliderLabel(size);
 
-   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
-  function determineDx (elem, size) {
-    var oldWidth = elem.offsetWidth;
-    var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
-    var oldSize = oldWidth / windowWidth;
-
-    // Changes the slider value to a percent width
-    function sizeSwitcher (size) {
-      switch(size) {
-        case "1":
-          return 0.25;
-        case "2":
-          return 0.3333;
-        case "3":
-          return 0.5;
-        default:
-          console.log("bug in sizeSwitcher");
-      }
+  // Variable that holds the new size of pizzas
+  var newSize = 0;
+  // Changes the slider value to a percent width
+  function sizeSwitcher (size) {
+    switch(size) {
+      case "1":
+        return 25;
+      case "2":
+        return 33.33;
+      case "3":
+        return 50;
+      default:
+        console.log("bug in sizeSwitcher");
     }
-
-    var newSize = sizeSwitcher(size);
-    var dx = (newSize - oldSize) * windowWidth;
-
-    return dx;
   }
+
+  // Assign the new percent width to newSize
+  newSize = sizeSwitcher(size);
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    // Store the collection of found elements; by searching the document object
+    // outside of the loop, we perform the operation only once, avoiding some
+    // major performance issues
+    var randomPizza = document.getElementsByClassName('randomPizzaContainer');
+    for (var i = 0; i < randomPizza.length; i++) {
+      // Assign the new percentage width to every element
+      randomPizza[i].style.width = newSize + '%';
     }
   }
 
