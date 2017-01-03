@@ -492,16 +492,68 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
-// Moves the sliding background pizzas based on scroll position
+// My solution was pulled from an article written by Paul Lewis on HTML5
+// Rocks, which I read about on the forums.
+// I copied its code from the last example in the page and adapted it
+// to the needs of this app.
+// [Leaner, Meaner, Faster Animations with requestAnimationFrame]
+// (https://www.html5rocks.com/en/tutorials/speed/animations/)
+
+var movers = document.getElementsByClassName('mover'),
+  lastScrollY = 0,
+  scrollFromTop = 0,
+  ticking = false;
+
+// Callback for our scroll event - keeps track of the last scroll value
+function onScroll() {
+  lastScrollY = window.scrollY;
+  scrollFromTop = (document.body.scrollTop / 1250);
+  requestTick();
+}
+
+// Calls requestAnimationFrame if it's not already been done
+function requestTick() {
+  if (!ticking) {
+    requestAnimationFrame(updatePositions);
+    ticking = true;
+  }
+}
+
+// The animation callback; moves the sliding background pizzas
+// based on scroll position
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  var mover = null;
+
+  // Since there are only 5 values for phases, based on the 5 integers
+  // between 0 and 4, we store them in an array to avoid doing extra
+  // computations
+  var phases = [];
+  for (var k = 0; k < 5; k++) {
+    phases.push(Math.sin(scrollFromTop + k));
   }
+
+  // The second loop is going to go through the movers and moves
+  // them using the CSS3 hardware acceleration function translateX()
+  for (var i = 0, j = 0; i < movers.length; i++, j++) {
+    // To assign the right phase to each '.mover' element, we need
+    // to make sure the index j is correctly between 0 and 4; so it gets
+    // reset to 0 as it reaches the value 5
+    if (j > 4) {
+      j = 0;
+    }
+
+    mover = movers[i];
+
+    var phase = phases[j];
+    movers[i].style.transform = 'translateX(' +
+      parseInt(movers[i].basicLeft + 100 * phase) + 'px)';
+  }
+
+  // Reset the tick so we can capture the next onScroll
+  ticking = false;
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
@@ -513,14 +565,17 @@ function updatePositions() {
   }
 }
 
-// runs updatePositions on scroll
-window.addEventListener('scroll', updatePositions);
+// only listen for scroll events
+window.addEventListener('scroll', onScroll, false);
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  // I changed the number of moving pizzas to a much smaller
+  // quantity, that is roughly similar to the number of images
+  // that show up on the screen at any given scroll
+  for (var i = 0; i < 24; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
@@ -528,7 +583,9 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    // Here document.getElementById takes place of the much slower
+    // document.querySelectorAll selector
+    document.getElementById("movingPizzas1").appendChild(elem);
   }
   updatePositions();
 });
