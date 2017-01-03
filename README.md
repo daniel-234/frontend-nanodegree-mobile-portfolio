@@ -76,3 +76,8 @@ The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstra
 * Moved computations from inside loops that didn't need to be there and moved initializations that didn't need to be redone at every function call outside of it
 * Added requestAnimationFrame inside the code to ensure it would run at 60 frames per second (I relied on the code written by Paul Lewis in an article on HTML5 Rocks) [Faster animations with requestAnimationFrame](https://www.html5rocks.com/en/tutorials/speed/animations/)
 * Promoted '.mover' elements to their own layers to avoid repainting everything at any scroll
+
+
+### Run the application
+
+To run the application, fork the repository or clone or download it to your local machine and open the file index.html with your browser.
