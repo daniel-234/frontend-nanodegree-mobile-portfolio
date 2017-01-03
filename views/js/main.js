@@ -549,7 +549,7 @@ function updatePositions() {
 
     var phase = phases[j];
     movers[i].style.transform = 'translateX(' +
-      parseInt(movers[i].basicLeft + 100 * phase) + 'px)';
+      parseInt(movers[i].basicLeft + 100 * phase - 1250) + 'px)';
   }
 
   // Reset the tick so we can capture the next onScroll
