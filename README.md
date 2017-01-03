@@ -32,7 +32,7 @@ Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
 
 ####Part 2: Optimize Frames per Second in pizza.html
 
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
+To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js.
 
 You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
 
@@ -53,3 +53,26 @@ The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstra
 
 * <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
 * <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
+
+
+### Optimizations made in this project
+
+####Part 1: Optimize PageSpeed Insights score for index.html
+
+* Images of different sizes and compression rates were added to optimize their upload based on the viewport being used
+* Google analytics was made load asynchronously
+* Web Font Loader was used to load fonts asynchronously
+* CSS was inlined inside index.html and made mobile first
+
+####Part 2 - A: Make pizzas resize in less than 5ms
+
+* Deleted function determineDx
+* Made function sizeSwitcher return the new percentage size
+* Made some major changes in changePizzaSizes() by searching the document object outside of the loop and assigning the new percentage width to every element
+
+####Part 2 - B: Optimize Frames per Second in pizza.html
+
+* Modified the number of moving pizzas that are created when the DOM content is loaded to be roughly the number we can see showing up at any given scroll
+* Moved computations from inside loops that didn't need to be there and moved initializations that didn't need to be redone at every function call outside of it
+* Added requestAnimationFrame inside the code to ensure it would run at 60 frames per second (I relied on the code written by Paul Lewis in an article on HTML5 Rocks) [Faster animations with requestAnimationFrame](https://www.html5rocks.com/en/tutorials/speed/animations/)
+* Promoted '.mover' elements to their own layers to avoid repainting everything at any scroll
